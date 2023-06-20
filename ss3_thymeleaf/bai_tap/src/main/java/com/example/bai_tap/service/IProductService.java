@@ -12,5 +12,9 @@ public interface IProductService {
     Product getProductById(int id);
 
     void updateProduct(Product product);
+
+    void deleteProduct (int id);
+
+    List<Product> searchProduct (String name);
 }
 

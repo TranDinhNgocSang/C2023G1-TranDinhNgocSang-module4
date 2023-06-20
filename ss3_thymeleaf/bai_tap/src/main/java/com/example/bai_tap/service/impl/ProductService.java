@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class ProductService implements com.example.bai_tap.service.IProductService {
     @Autowired
-    IProductRepository productRepository;
+    private IProductRepository productRepository;
 
     @Override
     public List<Product> getListProduct() {
@@ -30,5 +30,15 @@ public class ProductService implements com.example.bai_tap.service.IProductServi
     @Override
     public void updateProduct(Product product) {
         productRepository.updateProduct(product);
+    }
+
+    @Override
+    public void deleteProduct (int id) {
+        productRepository.deleteProduct(id);
+    }
+
+    @Override
+    public List<Product> searchProduct(String name) {
+        return productRepository.searchProduct(name);
     }
 }

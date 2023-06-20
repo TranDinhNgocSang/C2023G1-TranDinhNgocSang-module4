@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<head th:insert="/layout :: head">
+<body>
+<div id="form">
+    <form th:action="@{/edit}" th:object="${product}" method="post">
+        <input type="hidden" th:field="*{id}"><br>
+        <table>
+            <tr>
+                <th>Name</th>
+                <td><input type="text" th:field="*{name}" readonly></td>
+            </tr>
+            <tr>
+                <th>Price</th>
+                <td><input type="number" th:field="*{price}" readonly></td>
+            </tr>
+            <tr>
+                <th>Describe</th>
+                <td><input type="text" th:field="*{describe}" readonly></td>
+            </tr>
+            <tr>
+                <th>Manufacture</th>
+                <td><input type="text" th:field="*{manufacture}" readonly></td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>

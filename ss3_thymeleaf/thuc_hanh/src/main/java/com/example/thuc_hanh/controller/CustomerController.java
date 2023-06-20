@@ -16,8 +16,8 @@ import java.util.List;
 
 @Controller
 public class CustomerController {
-   @Autowired
-   ICustomerService customerService;
+    @Autowired
+    private ICustomerService customerService;
 
     @GetMapping("")
     public String index(Model model) {
@@ -41,7 +41,7 @@ public class CustomerController {
     @PostMapping("/update")
     public String update(Customer customer) {
         customerService.update(customer.getId(), customer);
-        return "redirect:/customer";
+        return "redirect:/";
     }
 
     @GetMapping("/{id}/delete")
@@ -54,7 +54,7 @@ public class CustomerController {
     public String delete(Customer customer, RedirectAttributes redirect) {
         customerService.remove(customer.getId());
         redirect.addFlashAttribute("success", "Removed customer successfully!");
-        return "redirect:/customer";
+        return "redirect:/";
     }
 
     @GetMapping("/{id}/view")
