@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 public class MailService implements IMailService {
     @Autowired
-    MailRepository mailRepository;
+    private MailRepository mailRepository;
 
     @Override
     public List<String> getLanguages() {

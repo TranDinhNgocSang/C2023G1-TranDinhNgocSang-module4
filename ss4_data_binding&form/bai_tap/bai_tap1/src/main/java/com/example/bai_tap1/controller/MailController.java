@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class MailController {
     @Autowired
-    MailService mailService;
+    private MailService mailService;
 
     @GetMapping("")
     public String detail(Model model) {
