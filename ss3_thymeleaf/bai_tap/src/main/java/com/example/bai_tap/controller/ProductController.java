@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -34,7 +35,7 @@ public class ProductController {
     String addProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         productService.addProduct(product);
         redirectAttributes.addFlashAttribute("msg", "successfully add new");
-        return "redirect:/";
+        return "redirect:/product";
     }
 
     @GetMapping("/edit/{id}")
@@ -50,7 +51,7 @@ public class ProductController {
     @PostMapping("/edit")
     String editProduct(@ModelAttribute Product product) {
         productService.updateProduct(product);
-        return "redirect:/";
+        return "redirect:/product";
     }
 
     @GetMapping("/delete/{id}")
@@ -59,7 +60,7 @@ public class ProductController {
             return "error";
         }else {
             productService.deleteProduct(id);
-            return "redirect:/";
+            return "redirect:/product";
         }
     }
 
