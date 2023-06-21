@@ -41,4 +41,9 @@ public class ProductService implements com.example.bai_tap.service.IProductServi
     public List<Product> searchProduct(String name) {
         return productRepository.searchProduct(name);
     }
+
+    @Override
+    public int findIndexById(int id) {
+        return productRepository.findIndexById(id);
+    }
 }
