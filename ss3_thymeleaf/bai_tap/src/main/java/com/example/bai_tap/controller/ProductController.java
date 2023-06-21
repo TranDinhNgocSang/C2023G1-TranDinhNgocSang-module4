@@ -39,8 +39,12 @@ public class ProductController {
 
     @GetMapping("/edit/{id}")
     String showEdit(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "edit";
+        if (productService.findIndexById(id)==-1){
+            return "error";
+        }else {
+            model.addAttribute("product", productService.getProductById(id));
+            return "edit";
+        }
     }
 
     @PostMapping("/edit")
@@ -51,14 +55,22 @@ public class ProductController {
 
     @GetMapping("/delete/{id}")
     String deleteProduct(@PathVariable int id) {
-        productService.deleteProduct(id);
-        return "redirect:/";
+        if (productService.findIndexById(id)==-1) {
+            return "error";
+        }else {
+            productService.deleteProduct(id);
+            return "redirect:/";
+        }
     }
 
     @GetMapping("/view/{id}")
     String viewProduct(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "view";
+        if (productService.findIndexById(id)==-1) {
+            return "error";
+        }else {
+            model.addAttribute("product", productService.getProductById(id));
+            return "view";
+        }
     }
 
     @GetMapping("/search")
