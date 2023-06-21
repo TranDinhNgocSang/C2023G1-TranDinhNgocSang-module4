@@ -8,7 +8,7 @@
 <body>
 <h2>create product</h2>
 <div>
-    <form th:action="@{/add}" th:object="${product}" method="post">
+    <form th:action="@{/product/add}" th:object="${product}" method="post">
         <input type="hidden" th:field ="*{id}"><br>
         <table>
             <tr>
@@ -32,8 +32,8 @@
                 <td><input type="submit" value="submit"></td>
             </tr>
         </table>
-
     </form>
 </div>
+<a href="/product">back to list</a>
 </body>
 </html>

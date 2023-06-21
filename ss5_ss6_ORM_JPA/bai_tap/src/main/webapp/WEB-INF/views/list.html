@@ -14,10 +14,10 @@
 </head>
 <body class="container">
 <h3>Products</h3>
-<p><a th:href="@{/add}">Add new products</a></p>
+<p><a th:href="@{/product/add}">Add new products</a></p>
 <p th:if="${msg!= null}" th:text="${msg}" id="add"></p>
 
-<form action="/search" method="get">
+<form action="/product/search" method="get">
     <input type="text" placeholder="name product" name="search" class="form-control" id="input">
     <button type="submit" class="button btn-primary">search</button>
 </form>
@@ -41,9 +41,9 @@
         <td th:text="${product.getDescribeProduct()}"></td>
         <td th:text="${product.getManufacture()}"></td>
 <!--        <td><a th:href="@{/edit?id=${product.getId()}}">edit</a></td>-->
-        <td><a th:href="@{/edit/{id}(id=${product.getId()})}">edit</a></td>
-        <td><a th:href="@{/delete/{id}(id=${product.getId()})}">delete</a></td>
-        <td><a th:href="@{/view/{id}(id=${product.getId()})}">view</a></td>
+        <td><a th:href="@{/product/edit/{id}(id=${product.getId()})}">edit</a></td>
+        <td><a th:href="@{/product/delete/{id}(id=${product.getId()})}">delete</a></td>
+        <td><a th:href="@{/product/view/{id}(id=${product.getId()})}">view</a></td>
     </tr>
 </table>
 </body>

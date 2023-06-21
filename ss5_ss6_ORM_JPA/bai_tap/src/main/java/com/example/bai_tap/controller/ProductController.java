@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
 @Controller
+@RequestMapping("/product")
 public class ProductController {
     @Autowired
     private IProductService productService;
@@ -34,31 +35,43 @@ public class ProductController {
     String addProduct(@ModelAttribute Product product, RedirectAttributes redirectAttributes) {
         productService.addProduct(product);
         redirectAttributes.addFlashAttribute("msg", "successfully add new");
-        return "redirect:/";
+        return "redirect:/product";
     }
 
     @GetMapping("/edit/{id}")
     String showEdit(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "edit";
+        if (productService.getProductById(id)==null){
+            return "error";
+        }else {
+            model.addAttribute("product", productService.getProductById(id));
+            return "edit";
+        }
     }
 
     @PostMapping("/edit")
     String editProduct(@ModelAttribute Product product) {
         productService.updateProduct(product);
-        return "redirect:/";
+        return "redirect:/product";
     }
 
     @GetMapping("/delete/{id}")
     String deleteProduct(@PathVariable int id) {
-        productService.deleteProduct(id);
-        return "redirect:/";
+        if (productService.getProductById(id)==null){
+            return "error";
+        }else {
+            productService.deleteProduct(id);
+            return "redirect:/product";
+        }
     }
 
     @GetMapping("/view/{id}")
     String viewProduct(@PathVariable int id, Model model) {
-        model.addAttribute("product", productService.getProductById(id));
-        return "view";
+        if (productService.getProductById(id)==null){
+            return "error";
+        }else {
+            model.addAttribute("product", productService.getProductById(id));
+            return "view";
+        }
     }
 
     @GetMapping("/search")

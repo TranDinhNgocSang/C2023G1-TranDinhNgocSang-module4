@@ -4,20 +4,16 @@ import com.example.bai_tap.model.Product;
 import com.example.bai_tap.repositoty.ConnectionUtils;
 import com.example.bai_tap.repositoty.IProductRepository;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
-
-import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
 public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> getListProduct() {
-        return ConnectionUtils.getEntityManager().createQuery("SELECT P FROM Product AS P").getResultList();
+        return ConnectionUtils.getEntityManager().createQuery("SELECT P FROM Product AS P",Product.class).getResultList();
     }
 
     @Override
@@ -56,7 +52,13 @@ public class ProductRepository implements IProductRepository {
         String queryStr = "SELECT p FROM Product AS p WHERE p.id = :id";
         TypedQuery<Product> query = ConnectionUtils.getEntityManager().createQuery(queryStr, Product.class);
         query.setParameter("id", id);
-        return query.getSingleResult();    }
+        try {
+            query.getSingleResult();
+        }catch (Exception e){
+            return null;
+        }
+        return query.getSingleResult();
+    }
 
     @Override
     public void updateProduct(Product product) {

@@ -8,7 +8,7 @@
 <body>
 <h2>Edit product</h2>
 <div id="form">
-    <form th:action="@{/edit}" th:object="${product}" method="post">
+    <form th:action="@{/product/edit}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{id}"><br>
         <table>
             <tr>
@@ -34,6 +34,7 @@
         </table>
     </form>
 </div>
+<a href="/product">back to list</a>
 </body>
 
 </html>

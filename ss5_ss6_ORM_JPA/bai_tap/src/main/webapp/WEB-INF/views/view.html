@@ -7,7 +7,7 @@
 <head th:insert="/layout :: head">
 <body>
 <div id="form">
-    <form th:action="@{/edit}" th:object="${product}" method="post">
+    <form th:action="@{/product/edit}" th:object="${product}" method="post">
         <input type="hidden" th:field="*{id}"><br>
         <table>
             <tr>
@@ -20,7 +20,7 @@
             </tr>
             <tr>
                 <th>Describe</th>
-                <td><input type="text" th:field="*{describe}" readonly></td>
+                <td><input type="text" th:field="*{describeProduct}" readonly></td>
             </tr>
             <tr>
                 <th>Manufacture</th>
@@ -29,5 +29,6 @@
         </table>
     </form>
 </div>
+<a href="/product">back to list</a>
 </body>
 </html>
