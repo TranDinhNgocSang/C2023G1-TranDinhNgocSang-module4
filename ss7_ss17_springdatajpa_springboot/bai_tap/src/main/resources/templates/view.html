@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>view blog</title>
+</head>
+<body>
+<form th:action="@{/blog/add}" th:object="${blog}" method="post">
+    <input type="hidden" th:field ="*{idBlog}"><br>
+    <table border="1">
+        <tr>
+            <th>Tile</th>
+            <td><input type="text" th:field="*{tileBlog}" readonly></td>
+        </tr>
+        <tr>
+            <th>content</th>
+            <td><input type="text" th:field="*{content}" readonly></td>
+        </tr>
+        <tr>
+            <th>user name</th>
+            <td><input type="text" th:field="*{nameUser}" readonly></td>
+        </tr>
+    </table>
+    <input type="text" th:field ="*{dateSubmit}" readonly><br>
+</form>
+</body>
+</html>
