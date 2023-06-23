@@ -8,20 +8,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #cc6b6b; color: white">
     <div class="container-fluid">
         <a class="navbar-brand" href="/blog"><h3>Blog</h3></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     </div>
 </nav>
 <form th:action="@{/blog/edit}" th:object="${blog}" method="post">
-    <input type="hidden" th:field ="*{idBlog}"><br>
-    <input type="hidden" th:field ="*{dateSubmit}"><br>
-    <table border="1" style="width: 100%" >
+    <input type="hidden" th:field="*{idBlog}"><br>
+    <input type="hidden" th:field="*{dateSubmit}"><br>
+    <table border="1" style="width: 100%">
         <th style="width: 10%">type</th>
         <td>
             <select th:field="*{blogType}">
-                <option th:each="type: ${listType}" th:text="${type.nameBlogType}" th:value="${type.idBlogType}"></option>
+                <option th:each="type: ${listType}" th:text="${type.nameBlogType}"
+                        th:value="${type.idBlogType}"></option>
             </select>
         </td>
         <tr>

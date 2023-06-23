@@ -22,7 +22,8 @@
             <th style="width: 10%">type</th>
             <td>
                 <select th:field="*{blogType}">
-                    <option th:each="type: ${listType}" th:text="${type.nameBlogType}" th:value="${type.idBlogType}"></option>
+                    <option th:each="type: ${listType}" th:text="${type.nameBlogType}"
+                            th:value="${type.idBlogType}"></option>
                 </select>
             </td>
         </tr>

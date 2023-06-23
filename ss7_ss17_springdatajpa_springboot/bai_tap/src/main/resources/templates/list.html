@@ -8,7 +8,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark " style="background-color: #cc6b6b; color: white">
     <div class="container-fluid">
         <a class="navbar-brand" href="/blog"><h3>Blog</h3></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -17,8 +18,14 @@
                     <a class="nav-link active" aria-current="page" th:href="@{/blog/add}">Add new Blog</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="tile" aria-label="Search" >
+            <form class="d-flex" action="/blog/search" method="post">
+                <input class="form-control me-2" type="search" placeholder="tile" aria-label="Search" name="title"
+                       value="">
+                <select name="type">
+                    <option value="">thể loại</option>
+                    <option th:each="type: ${listType}" th:text="${type.nameBlogType}"
+                            th:value="${type.idBlogType}"></option>
+                </select>
                 <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
         </div>
@@ -28,13 +35,15 @@
     <img height="500px" th:src="${blog.image}" class="card-img-top" alt="photo">
     <div class="card-body">
         <span>thể loại: </span><span th:text="${blog.blogType.nameBlogType}"></span>
-        <h6 class="card-text"  th:text="${blog.getNameUser()}"></h6>
-        <a style="text-decoration: none; color: black" th:href="@{/blog/view/{id}(id=${blog.getIdBlog()})}"><h5 class="card-title" th:text="${blog.getTileBlog()}"></h5></a>
-        <p class="card-text"  th:text="${blog.getDescribeBlog()}"></p>
+        <h6 class="card-text" th:text="${blog.getNameUser()}"></h6>
+        <a style="text-decoration: none; color: black" th:href="@{/blog/view/{id}(id=${blog.getIdBlog()})}"><h5
+                class="card-title" th:text="${blog.getTileBlog()}"></h5></a>
+        <p class="card-text" th:text="${blog.getDescribeBlog()}"></p>
         <p class="card-text"><small class="text-muted" th:text="${blog.getDateSubmit()}"></small></p>
     </div>
     <div class="dropdown" style="position: absolute;top: auto">
-        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+           data-bs-toggle="dropdown" aria-expanded="false">
             ...
         </a>
 
@@ -46,9 +55,11 @@
 </div>
 <nav aria-label="Page navigation example">
     <ul class="pagination">
-        <li class="page-item"><a class="page-link" th:if="${list.hasPrevious()}" th:href="@{/blog(page=${list.number - 1})}">Previous</a></li>
+        <li class="page-item"><a class="page-link" th:if="${list.hasPrevious()}"
+                                 th:href="@{/blog(page=${list.number - 1})}">Previous</a></li>
         <li class="page-item"><a class="page-link" th:text="${list.number+1}"></a></li>
-        <li class="page-item"><a class="page-link"th:if="${list.hasNext()}" th:href="@{/blog(page=${list.number + 1})}">Next</a></li>
+        <li class="page-item"><a class="page-link" th:if="${list.hasNext()}"
+                                 th:href="@{/blog(page=${list.number + 1})}">Next</a></li>
     </ul>
 </nav>
 </body>

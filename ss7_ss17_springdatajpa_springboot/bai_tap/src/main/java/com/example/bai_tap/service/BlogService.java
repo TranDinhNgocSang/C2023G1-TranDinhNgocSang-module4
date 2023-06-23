@@ -8,8 +8,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Service
-public class BlogService implements IBlogService{
+public class BlogService implements IBlogService {
     @Autowired
     private IBogRepository blogRepository;
 
@@ -25,7 +26,9 @@ public class BlogService implements IBlogService{
 
     @Override
     public void deleteBlog(int id) {
-        blogRepository.deleteById(id);
+        Blog blog = getBlogByID(id);
+        blog.setDelete(true);
+        blogRepository.save(blog);
     }
 
     @Override
@@ -40,7 +43,12 @@ public class BlogService implements IBlogService{
 
     @Override
     public Page<Blog> getBlogWithPageable(Pageable pageable) {
-        return blogRepository.findByIsDeleteFalse(pageable);
+        return blogRepository.findByisDeleteIsFalse(pageable);
+    }
+
+    @Override
+    public Page<Blog> findByTileBlogContainingAndIdBlogType(String title, String idBlogType, Pageable pageable) {
+        return blogRepository.findByTileBlogContainingAndIdBlogType(title, idBlogType, pageable);
     }
 
 
