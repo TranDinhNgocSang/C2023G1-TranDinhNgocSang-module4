@@ -1,40 +1,39 @@
 package com.example.bai_tap.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 @Entity
 public class Blog {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private int idBlog;
+    @Column(columnDefinition = "LONGTEXT")
     private String tileBlog;
     private LocalDate dateSubmit;
     private String nameUser;
+    @Column(columnDefinition = "LONGTEXT")
     private String content;
+    @Column(columnDefinition = "LONGTEXT")
+    private String describeBlog;
+    private String image;
+    private boolean isDelete;
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private BlogType blogType;
 
     public Blog() {
     }
 
-    public Blog(int idBlog, String tileBlog, LocalDate dateSubmit, String nameUser, String content) {
+    public Blog(int idBlog, String tileBlog, LocalDate dateSubmit, String nameUser, String content, String describeBlog, String image, boolean isDelete, BlogType blogType) {
         this.idBlog = idBlog;
         this.tileBlog = tileBlog;
         this.dateSubmit = dateSubmit;
         this.nameUser = nameUser;
         this.content = content;
-    }
-
-    public Blog(String tileBlog, LocalDate dateSubmit, String nameUser, String content) {
-        this.tileBlog = tileBlog;
-        this.dateSubmit = dateSubmit;
-        this.nameUser = nameUser;
-        this.content = content;
-    }
-
-    public Blog(LocalDate dateSubmit) {
-        this.dateSubmit = dateSubmit;
+        this.describeBlog = describeBlog;
+        this.image = image;
+        this.isDelete = isDelete;
+        this.blogType = blogType;
     }
 
     public int getIdBlog() {
@@ -75,5 +74,37 @@ public class Blog {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getDescribeBlog() {
+        return describeBlog;
+    }
+
+    public void setDescribeBlog(String describeBlog) {
+        this.describeBlog = describeBlog;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
+    }
+
+    public BlogType getBlogType() {
+        return blogType;
+    }
+
+    public void setBlogType(BlogType blogType) {
+        this.blogType = blogType;
     }
 }

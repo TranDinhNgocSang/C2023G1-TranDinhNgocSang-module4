@@ -2,11 +2,14 @@ package com.example.bai_tap.controller;
 
 import com.example.bai_tap.model.Blog;
 import com.example.bai_tap.service.IBlogService;
+import com.example.bai_tap.service.IBlogTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -16,23 +19,31 @@ public class BlogController {
     @Autowired
     private IBlogService blogService;
 
+    @Autowired
+    private IBlogTypeService blogTypeService;
+
     @GetMapping("")
-    public String showList (Model model){
-        model.addAttribute("list",blogService.getListBlog());
+    public String showList (Model model, @PageableDefault(size = 2) Pageable pageable){
+        model.addAttribute("list",blogService.getBlogWithPageable(pageable));
         return "list";
     }
 
     @GetMapping("/add")
     public String showAddBlogForm(Model model){
+        model.addAttribute("listType",blogTypeService.getBlogType());
         model.addAttribute("blog", new Blog());
         return "add";
     }
 
     @PostMapping("/add")
-    public String addBlog(@ModelAttribute Blog blog, RedirectAttributes redirectAttributes){
-        blog.setDateSubmit(LocalDate.now());
-       blogService.addNewBlog(blog);
-        return "redirect:/blog";
+    public String addBlog(@ModelAttribute Blog blog){
+        if (blogService.getBlogByID(blog.getIdBlog())!=null){
+            return "error";
+        }else {
+            blog.setDateSubmit(LocalDate.now());
+            blogService.addNewBlog(blog);
+            return "redirect:/blog";
+        }
     }
 
     @GetMapping("/delete/{id}")
@@ -50,6 +61,7 @@ public class BlogController {
             return "error";
         }else {
             Blog blog = blogService.getBlogByID(id);
+            model.addAttribute("listType",blogTypeService.getBlogType());
             model.addAttribute("blog", blog);
             return "edit";
         }
@@ -57,8 +69,12 @@ public class BlogController {
 
     @PostMapping("/edit")
     String editBlog(@ModelAttribute Blog blog) {
-        blogService.updateBlog(blog);
-        return "redirect:/blog";
+        if (blogService.getBlogByID(blog.getIdBlog())==null){
+            return "error";
+        }else {
+            blogService.updateBlog(blog);
+            return "redirect:/blog";
+        }
     }
 
     @GetMapping("/view/{id}")
@@ -70,7 +86,4 @@ public class BlogController {
             return "view";
         }
     }
-
-
-
 }

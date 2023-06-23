@@ -3,6 +3,8 @@ package com.example.bai_tap.service;
 import com.example.bai_tap.model.Blog;
 import com.example.bai_tap.repository.IBogRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,7 +14,7 @@ public class BlogService implements IBlogService{
     private IBogRepository blogRepository;
 
     @Override
-    public List<Blog> getListBlog() {
+    public List<Blog> getListBlog(Pageable pageable) {
         return blogRepository.findAll();
     }
 
@@ -34,6 +36,11 @@ public class BlogService implements IBlogService{
     @Override
     public void updateBlog(Blog blog) {
         blogRepository.save(blog);
+    }
+
+    @Override
+    public Page<Blog> getBlogWithPageable(Pageable pageable) {
+        return blogRepository.findByIsDeleteFalse(pageable);
     }
 
 
