@@ -10,12 +10,28 @@ public class BlogType {
     @Column(nullable = false)
     private String nameBlogType;
 
+    public boolean isDelete;
+
     public BlogType() {
     }
 
     public BlogType(int idBlogType, String nameBlogType) {
         this.idBlogType = idBlogType;
         this.nameBlogType = nameBlogType;
+    }
+
+    public BlogType(int idBlogType, String nameBlogType, boolean isDelete) {
+        this.idBlogType = idBlogType;
+        this.nameBlogType = nameBlogType;
+        this.isDelete = isDelete;
+    }
+
+    public boolean isDelete() {
+        return isDelete;
+    }
+
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 
     public int getIdBlogType() {

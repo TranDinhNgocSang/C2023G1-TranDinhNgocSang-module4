@@ -20,7 +20,7 @@
       <td th:text="${song.nameSong}"></td>
       <td th:text="${song.singer}"></td>
       <td th:text="${song.kindMusic}"></td>
-      <td></td>
+      <td><a th:href="@{/song/edit/{id}(id=${song.getIdSong()})}">edit</a></td>
       <td><a th:href="@{/song/delete/{id}(id=${song.getIdSong()})}">delete</a></td>
   </tr>
 </table>

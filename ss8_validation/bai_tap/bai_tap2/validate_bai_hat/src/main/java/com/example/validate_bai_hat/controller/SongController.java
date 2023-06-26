@@ -34,22 +34,56 @@ public class SongController {
     @PostMapping("/add")
     public String addSong(@Valid @ModelAttribute SongDto songDto, BindingResult bindingResult, Model model,
                           RedirectAttributes redirectAttributes) {
+        if (songService.getSongByid(songDto.getIdSong()) != null) {
+            return "error";
+        }
         if (bindingResult.hasErrors()) {
             model.addAttribute("songDto", songDto);
             return "add";
-        }else {
-        Song song = new Song();
-        BeanUtils.copyProperties(songDto, song);
-        songService.updateSong(song);
-        redirectAttributes.addFlashAttribute("msg", "successfully added new");
-        return "redirect:/song";
+        } else {
+            Song song = new Song();
+            BeanUtils.copyProperties(songDto, song);
+            songService.updateSong(song);
+            redirectAttributes.addFlashAttribute("msg", "successfully added new");
+            return "redirect:/song";
         }
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteSong(@PathVariable("id") int id){
+    public String deleteSong(@PathVariable("id") int id) {
+        if (songService.getSongByid(id) == null) {
+            return "error";
+        }
         songService.deleteSong(id);
         return "redirect:/song";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable("id") int id, Model model) {
+        if (songService.getSongByid(id) == null) {
+            return "error";
+        }
+        Song song = songService.getSongByid(id);
+        model.addAttribute("song", song);
+        return "edit";
+    }
+
+    @PostMapping("/edit")
+    public String editSong(@Valid @ModelAttribute SongDto song, BindingResult bindingResult, Model model,
+                           RedirectAttributes redirectAttributes) {
+        if (songService.getSongByid(song.getIdSong()) == null) {
+            return "error";
+        }
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("song", song);
+            return "edit";
+        } else {
+            Song song1 = new Song();
+            BeanUtils.copyProperties(song, song1);
+            songService.updateSong(song1);
+            redirectAttributes.addFlashAttribute("msg", "successfully edit");
+            return "redirect:/song";
+        }
     }
 
 }

@@ -7,4 +7,10 @@ import java.util.List;
 
 public interface IBlogTypeService {
     List<BlogType> getBlogType();
+
+    void UpdateBlogType(BlogType blogType);
+
+    BlogType getBlogTypeById(int id);
+
+    void deleteBlogType(int id);
 }

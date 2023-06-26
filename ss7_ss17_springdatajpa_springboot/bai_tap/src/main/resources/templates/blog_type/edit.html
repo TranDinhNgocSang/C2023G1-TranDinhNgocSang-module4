@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit blog type</title>
+</head>
+<body>
+<form th:action="@{/blog-type/edit}" method="post" th:object="${type}">
+  <input type="number" th:field="*{idBlogType}" hidden="hidden">
+  <table>
+    <tr>
+      <th>name blog type</th>
+      <td>
+        <input type="text" th:field="*{nameBlogType}">
+      </td>
+    </tr>
+    <tr>
+      <th></th>
+      <td>
+        <button type="submit">submit</button>
+      </td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

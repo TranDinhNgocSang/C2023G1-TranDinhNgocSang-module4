@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>add blog type</title>
+</head>
+<body>
+<h2>add blog type</h2>
+<form th:action="@{/blog-type/add}" method="post" th:object="${type}">
+    <table>
+        <tr>
+            <th>name blog type</th>
+            <td>
+                <input type="text" th:field="*{nameBlogType}">
+            </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <button type="submit">submit</button>
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

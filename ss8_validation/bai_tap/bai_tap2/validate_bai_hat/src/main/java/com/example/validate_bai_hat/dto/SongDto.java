@@ -10,14 +10,13 @@ import javax.validation.constraints.Size;
 
 public class SongDto {
     private int idSong;
-    @NotBlank(message = "")
-    @Pattern(regexp = "^[^@;,.\\-=+!#$%&<>]{1,800}$",message = "không đúng định dạng")
+    @Pattern(regexp = "^[\\w ]{1,800}$",message = "không đúng định dạng")
     private String nameSong;
-    @NotBlank(message = "")
-    @Pattern(regexp = "^[^@;,.\\-=+!#$%&<>]{1,300}$",message = "không đúng định dạng")
+
+    @Pattern(regexp = "^[\\w ]{1,300}$",message = "không đúng định dạng")
     private String singer;
-    @NotBlank(message = "")
-    @Pattern(regexp = "^[^@;.\\-=+!#$%&<>]{1,1000}$",message = "không đúng định dạng")
+
+    @Pattern(regexp = "^[\\w ]{1,1000}$",message = "không đúng định dạng")
     private String kindMusic;
     private boolean isDelete;
 

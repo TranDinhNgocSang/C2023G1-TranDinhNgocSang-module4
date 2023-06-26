@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>blog type</title>
+</head>
+<body>
+<h2>Blog type</h2>
+<a th:href="@{/blog-type/add}">add new</a>
+<p th:if="${msg}" th:text="${msg}"></p>
+<table border="1">
+    <tr>
+        <th>Num</th>
+        <th>Name Blog Type</th>
+        <th>Edit</th>
+        <th>delete</th>
+    </tr>
+    <tr th:each="type,loop:${list}">
+        <td th:text="${loop.count}"></td>
+        <td th:text="${type.getNameBlogType()}"></td>
+        <td><a th:href="@{/blog-type/edit(id=${type.getIdBlogType()})}">edit</a></td>
+        <td><a th:href="@{/blog-type/delete/{id}(id=${type.getIdBlogType()})}">edit</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

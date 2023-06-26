@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>edit</title>
+</head>
+<body>
+<h2>thêm mới</h2>
+<form th:action="@{/song/edit}" method="post" th:object="${song}">
+  <input type="hidden" th:field="*{idSong}" >
+  <!--    <input type="hidden" th:field="*{isDelete}" >-->
+  <table>
+    <tr>
+      <th>name song</th>
+      <td><input th:field="*{nameSong}"></td>
+      <td style="color:red" th:if="${#fields.hasErrors('nameSong')}" th:errors="*{nameSong}"></td>
+    </tr>
+    <tr>
+      <th>singer</th>
+      <td><input th:field="*{singer}"></td>
+      <td style="color:red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></td>
+    </tr>
+    <tr>
+      <th>kindMusic</th>
+      <td><input th:field="*{kindMusic}"></td>
+      <td style="color:red" th:if="${#fields.hasErrors('kindMusic')}" th:errors="*{kindMusic}"></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><button type="submit">submit</button></td>
+    </tr>
+  </table>
+</form>
+
+</body>
+</html>
