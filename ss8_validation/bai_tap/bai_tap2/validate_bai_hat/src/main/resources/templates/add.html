@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>thêm mới</title>
+</head>
+<body>
+<h2>thêm mới</h2>
+<form th:action="@{/song/add}" method="post" th:object="${songDto}">
+    <input type="hidden" th:field="*{idSong}" >
+<!--    <input type="hidden" th:field="*{isDelete}" >-->
+    <table>
+        <tr>
+            <th>name song</th>
+            <td><input th:field="*{nameSong}"></td>
+            <td style="color:red" th:if="${#fields.hasErrors('nameSong')}" th:errors="*{nameSong}"></td>
+        </tr>
+        <tr>
+            <th>singer</th>
+            <td><input th:field="*{singer}"></td>
+            <td style="color:red" th:if="${#fields.hasErrors('singer')}" th:errors="*{singer}"></td>
+        </tr>
+        <tr>
+            <th>kindMusic</th>
+            <td><input th:field="*{kindMusic}"></td>
+            <td style="color:red" th:if="${#fields.hasErrors('kindMusic')}" th:errors="*{kindMusic}"></td>
+        </tr>
+        <tr>
+            <th></th>
+            <td><button type="submit">submit</button></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

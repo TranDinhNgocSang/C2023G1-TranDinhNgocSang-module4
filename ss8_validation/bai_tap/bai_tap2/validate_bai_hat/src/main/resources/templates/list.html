@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>list song </title>
+</head>
+<body>
+<h2>list song</h2>
+<a th:href="@{/song/add}">thêm mới bài hát</a>
+<table border="1">
+  <tr>
+    <th>Num</th>
+    <th>name song</th>
+    <th>singer</th>
+    <th>king music</th>
+    <th>edit</th>
+    <th>delete</th>
+  </tr>
+  <tr th:each="song,loop : ${list}" >
+      <td th:text="${loop.count}"></td>
+      <td th:text="${song.nameSong}"></td>
+      <td th:text="${song.singer}"></td>
+      <td th:text="${song.kindMusic}"></td>
+      <td></td>
+      <td><a th:href="@{/song/delete/{id}(id=${song.getIdSong()})}">delete</a></td>
+  </tr>
+</table>
+</body>
+</html>
