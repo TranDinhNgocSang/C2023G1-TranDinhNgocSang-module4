@@ -39,7 +39,7 @@ public class BlogTypeController {
 
     @GetMapping("/edit")
     public String showEditForm(@RequestParam("id") int id, Model model) {
-        if (blogTypeService.getBlogTypeById(id)==null){
+        if (blogTypeService.getBlogTypeById(id)==null||blogTypeService.getBlogTypeById(id).isDelete()==true){
             return "/blog/error";
         }
         model.addAttribute("type", blogTypeService.getBlogTypeById(id));
@@ -48,7 +48,7 @@ public class BlogTypeController {
 
     @PostMapping("/edit")
     public String editBlogType(@ModelAttribute BlogType blogType) {
-        if (blogTypeService.getBlogTypeById(blogType.getIdBlogType())==null){
+        if (blogTypeService.getBlogTypeById(blogType.getIdBlogType())==null||blogTypeService.getBlogTypeById(blogType.getIdBlogType()).isDelete()==true){
             return "/blog/error";
         }
         blogTypeService.UpdateBlogType(blogType);
@@ -57,7 +57,7 @@ public class BlogTypeController {
 
     @GetMapping("/delete/{id}")
     public String deleteBlogType(@PathVariable("id") int id) {
-        if (blogTypeService.getBlogTypeById(id)==null){
+        if (blogTypeService.getBlogTypeById(id)==null||blogTypeService.getBlogTypeById(id).isDelete()==true){
             return "/blog/error";
         }
         blogTypeService.deleteBlogType(id);

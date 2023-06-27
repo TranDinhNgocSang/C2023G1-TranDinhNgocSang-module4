@@ -48,7 +48,7 @@ public class BlogController {
 
     @GetMapping("/delete/{id}")
     public String deleteBlog(@PathVariable int id) {
-        if (blogService.getBlogByID(id) == null) {
+        if (blogService.getBlogByID(id) == null||blogService.getBlogByID(id).isDelete()==true) {
             return "/blog/error";
         }
         blogService.deleteBlog(id);
@@ -57,7 +57,7 @@ public class BlogController {
 
     @GetMapping("/edit/{id}")
     public String showEditBlogForm(@PathVariable int id, Model model) {
-        if (blogService.getBlogByID(id) == null) {
+        if (blogService.getBlogByID(id) == null||blogService.getBlogByID(id).isDelete()==true) {
             return "/blog/error";
         } else {
             Blog blog = blogService.getBlogByID(id);
@@ -69,7 +69,7 @@ public class BlogController {
 
     @PostMapping("/edit")
     String editBlog(@ModelAttribute Blog blog) {
-        if (blogService.getBlogByID(blog.getIdBlog()) == null) {
+        if (blogService.getBlogByID(blog.getIdBlog()) == null||blogService.getBlogByID(blog.getIdBlog()).isDelete()==true) {
             return "/blog/error";
         } else {
             blogService.updateBlog(blog);
@@ -79,7 +79,7 @@ public class BlogController {
 
     @GetMapping("/view/{id}")
     String viewBlog(@PathVariable int id, Model model) {
-        if (blogService.getBlogByID(id) == null) {
+        if (blogService.getBlogByID(id) == null||blogService.getBlogByID(id).isDelete()==true) {
             return "/blog/error";
         } else {
             model.addAttribute("blog", blogService.getBlogByID(id));

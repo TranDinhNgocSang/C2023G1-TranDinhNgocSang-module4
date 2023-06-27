@@ -51,7 +51,7 @@ public class SongController {
 
     @GetMapping("/delete/{id}")
     public String deleteSong(@PathVariable("id") int id) {
-        if (songService.getSongByid(id) == null) {
+        if (songService.getSongByid(id) == null||songService.getSongByid(id).isDelete()==true) {
             return "error";
         }
         songService.deleteSong(id);
@@ -60,7 +60,7 @@ public class SongController {
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id") int id, Model model) {
-        if (songService.getSongByid(id) == null) {
+        if (songService.getSongByid(id) == null||songService.getSongByid(id).isDelete()==true) {
             return "error";
         }
         Song song = songService.getSongByid(id);
@@ -71,7 +71,7 @@ public class SongController {
     @PostMapping("/edit")
     public String editSong(@Valid @ModelAttribute SongDto song, BindingResult bindingResult, Model model,
                            RedirectAttributes redirectAttributes) {
-        if (songService.getSongByid(song.getIdSong()) == null) {
+        if (songService.getSongByid(song.getIdSong()) == null||songService.getSongByid(song.getIdSong()).isDelete()==true) {
             return "error";
         }
         if (bindingResult.hasErrors()) {

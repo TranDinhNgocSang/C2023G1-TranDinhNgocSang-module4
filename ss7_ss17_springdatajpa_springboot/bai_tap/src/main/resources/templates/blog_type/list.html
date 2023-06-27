@@ -19,7 +19,7 @@
         <td th:text="${loop.count}"></td>
         <td th:text="${type.getNameBlogType()}"></td>
         <td><a th:href="@{/blog-type/edit(id=${type.getIdBlogType()})}">edit</a></td>
-        <td><a th:href="@{/blog-type/delete/{id}(id=${type.getIdBlogType()})}">edit</a></td>
+        <td><a th:href="@{/blog-type/delete/{id}(id=${type.getIdBlogType()})}">delete</a></td>
     </tr>
 </table>
 
