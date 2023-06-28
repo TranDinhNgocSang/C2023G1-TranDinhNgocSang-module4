@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head>
+    <meta charset="UTF-8">
+    <title>view book</title>
+</head>
+<body th:object="${book}">
+<h2 style="text-align: center" th:text="*{nameBook}"></h2>
+<span>tác giả: </span><span th:text="*{authorBook}"></span>
+<hr>
+<p th:text="*{describeBook}"></p>
+<span>số lượng còn lại: </span><span th:text="*{quantity}"></span>
+<br>
+<button><a th:href="@{/book-rental/add/{id}(id=*{idBook})}">mượn sách</a></button>
+</body>
+</html>

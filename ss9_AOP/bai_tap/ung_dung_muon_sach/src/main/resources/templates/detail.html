@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head><head>
+<head>
+    <meta charset="UTF-8">
+    <title>detail</title>
+</head>
+<body th:object="${bookRental}">
+<h1>Trả sách thành công</h1>
+<h2 style="text-align: center" th:text="*{book.getNameBook()}"></h2>
+<span>tác giả: </span><span th:text="*{book.getAuthorBook()}"></span>
+<hr>
+<p th:text="*{book.getDescribeBook()}"></p>
+<span>ngày mượn </span><span th:text="*{borrowDay}"></span>
+<span>ngày trả </span><span th:text="*{returnDate}"></span>
+<a th:href="@{/book}">quay lại trang chủ</a>
+</body>
+</html>

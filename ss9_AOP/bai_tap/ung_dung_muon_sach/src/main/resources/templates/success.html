@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"><head><head>
+    <meta charset="UTF-8">
+    <title>success</title>
+</head>
+<body>
+<p>mượn thành công</p>
+<span>mã mượn sách của bạn là: </span><span th:if="${msg}" th:text="${msg}"></span>
+<hr>
+<a th:href="@{/book}">quay lại trang chủ</a>
+</body>
+</html>
