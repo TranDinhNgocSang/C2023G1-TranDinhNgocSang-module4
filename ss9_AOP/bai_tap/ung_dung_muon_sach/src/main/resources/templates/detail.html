@@ -11,7 +11,9 @@
 <hr>
 <p th:text="*{book.getDescribeBook()}"></p>
 <span>ngày mượn </span><span th:text="*{borrowDay}"></span>
+<br>
 <span>ngày trả </span><span th:text="*{returnDate}"></span>
+<br>
 <a th:href="@{/book}">quay lại trang chủ</a>
 </body>
 </html>

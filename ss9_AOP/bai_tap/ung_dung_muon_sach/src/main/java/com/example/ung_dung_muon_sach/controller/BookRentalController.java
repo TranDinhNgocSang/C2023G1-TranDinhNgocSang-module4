@@ -9,8 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
-import java.util.List;
 
 @Controller
 @RequestMapping("/book-rental")
@@ -24,31 +22,12 @@ public class BookRentalController {
     @GetMapping("/add/{id}")
     String addBookRental(@PathVariable("id") long id, Model model) {
         Book book = bookService.getBookById(id);
-        book.setQuantity(book.getQuantity() - 1);
-        if (book.getQuantity() <= 0) {
+        if (book.getQuantity() < 0) {
             model.addAttribute("msg", "hết sách rồi :(((");
             return "/fail";
         }
-        String codeBookRental = "";
-        boolean flag;
-        do {
-            flag = false;
-            int num1 = (int) (Math.random() * 100000);
-            codeBookRental += num1;
-            List<BookRental> list = bookRentalService.getListBookRental();
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i).getCodeBookRental().equals(codeBookRental)) {
-                    flag = true;
-                }
-            }
-        } while (flag);
-        BookRental bookRental = new BookRental();
-        bookRental.setCodeBookRental(codeBookRental);
-        bookRental.setBorrowDay(LocalDate.now());
-        bookRental.setBook(book);
-        bookRentalService.addBookRental(bookRental);
+        String codeBookRental = bookRentalService.addBookRentalAndUpdateBook(book);
         model.addAttribute("msg", codeBookRental);
-        bookService.updateBook(book);
         return "/success";
     }
 
@@ -59,20 +38,12 @@ public class BookRentalController {
 
     @PostMapping("/return")
     String returnBook(@RequestParam("code") String code, Model model) {
-        List<BookRental> list = bookRentalService.getListBookRental();
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getCodeBookRental().equals(code)) {
-                BookRental bookRental = list.get(i);
-                bookRental.setDelete(true);
-                Book book = bookService.getBookById(list.get(i).getBook().getIdBook());
-                book.setQuantity(book.getQuantity()+1);
-                bookRental.setReturnDate(LocalDate.now());
-                bookRentalService.updateBookRental(bookRental);
-                model.addAttribute("bookRental",bookRental);
-                return "/detail";
-            }
+        BookRental bookRental = bookRentalService.returnBook(code);
+        if (bookRental != null) {
+            model.addAttribute("bookRental",bookRental);
+            return "/detail";
         }
-        model.addAttribute("msg","mã không đúng");
+        model.addAttribute("msg", "mã không đúng");
         return "/fail";
     }
 

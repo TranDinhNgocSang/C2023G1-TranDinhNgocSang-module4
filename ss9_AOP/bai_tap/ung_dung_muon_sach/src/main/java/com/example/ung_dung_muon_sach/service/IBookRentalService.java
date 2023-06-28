@@ -1,5 +1,6 @@
 package com.example.ung_dung_muon_sach.service;
 
+import com.example.ung_dung_muon_sach.model.Book;
 import com.example.ung_dung_muon_sach.model.BookRental;
 
 import java.util.List;
@@ -10,4 +11,9 @@ public interface IBookRentalService {
     void addBookRental (BookRental bookRental);
 
     void updateBookRental(BookRental bookRental);
+
+    String addBookRentalAndUpdateBook(Book book);
+
+    BookRental returnBook(String code);
+
 }
