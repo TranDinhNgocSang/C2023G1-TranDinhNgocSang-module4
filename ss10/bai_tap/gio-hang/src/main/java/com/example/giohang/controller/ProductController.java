@@ -30,27 +30,28 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/add/{id}")
-    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @RequestParam("action") String action) {
-        Optional<Product> productOptional = productService.findById(id);
-        if (!productOptional.isPresent()) {
+    @GetMapping("/add/{id}/{action}")
+    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @PathVariable("action") String action) {
+        Product productOptional = productService.findById(id);
+        if (productOptional==null) {
             return "/error.404";
         }
         if (action.equals("show")) {
-            cart.addProduct(productOptional.get());
+            cart.addProduct(productOptional);
             return "redirect:/shopping/shopping-cart";
         }
         if (action.equals("low")){
-            cart.subProduct(productOptional.get());
+            cart.subProduct(productOptional);
             return "redirect:/shopping/shopping-cart";
         }
-        cart.addProduct(productOptional.get());
+        cart.addProduct(productOptional);
         return "redirect:/product";
     }
 
     @GetMapping("/view")
     String showView (@RequestParam("id") long id, Model model){
-        model.addAttribute("product",productService.getProductById(id));
+        model.addAttribute("product",productService.findById(id));
         return "view";
     }
+
 }

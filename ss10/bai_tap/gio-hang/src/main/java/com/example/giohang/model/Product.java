@@ -1,6 +1,7 @@
 package com.example.giohang.model;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "product")
@@ -56,5 +57,18 @@ public class Product {
 
     public void setImge(String imge) {
         this.imge = imge;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Product product = (Product) o;
+        return Double.compare(product.price, price) == 0 && id.equals(product.id) && name.equals(product.name) && description.equals(product.description) && imge.equals(product.imge);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, price, description, imge);
     }
 }
