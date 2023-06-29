@@ -30,23 +30,28 @@ public class ProductController {
         return modelAndView;
     }
 
-    @GetMapping("/add/{id}/{action}")
-    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @PathVariable("action") String action) {
-        Product productOptional = productService.findById(id);
-        if (productOptional==null) {
-            return "/error.404";
-        }
-        if (action.equals("show")) {
-            cart.addProduct(productOptional);
-            return "redirect:/shopping/shopping-cart";
-        }
-        if (action.equals("low")){
-            cart.subProduct(productOptional);
-            return "redirect:/shopping/shopping-cart";
-        }
-        cart.addProduct(productOptional);
-        return "redirect:/product";
-    }
+
+//    Nếu ở controller khai báo session thì có thể lấy session bằng @ModelAttribute hoặc @SessionAttributes
+//    nhưng qua controller khác thì chỉ lất session qua @SessionAttributes => dùng @SessionAttributes cho mọi trường hợp
+
+
+//    @GetMapping("/add/{id}/{action}")
+//    public String addToCart(@PathVariable Long id, @ModelAttribute Cart cart, @PathVariable("action") String action) {
+//        Product productOptional = productService.findById(id);
+//        if (productOptional==null) {
+//            return "/error.404";
+//        }
+//        if (action.equals("show")) {
+//            cart.addProductt(productOptional);
+//            return "redirect:/shopping/shopping-cart";
+//        }
+//        if (action.equals("low")){
+//            cart.subProductt(productOptional);
+//            return "redirect:/shopping/shopping-cart";
+//        }
+//        cart.addProductt(productOptional);
+//        return "redirect:/product";
+//    }
 
     @GetMapping("/view")
     String showView (@RequestParam("id") long id, Model model){

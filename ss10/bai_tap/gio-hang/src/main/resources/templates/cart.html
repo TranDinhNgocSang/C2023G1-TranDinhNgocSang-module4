@@ -31,25 +31,25 @@
                       <h6 class="text-black mb-0" th:text="${product.getKey().name}"></h6>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                        <a style="text-decoration: none" th:href="@{/product/add/{id}/{action}(id=${product.getKey().id},action='low')}">low </a>
+                        <a style="text-decoration: none" th:href="@{/shopping/add/{id}/{action}(id=${product.getKey().id},action='low')}">low </a>
 
                       <input style="width: 50px" id="form1" th:value="${product.getValue()}" type="number" readonly
                              class="form-control form-control-sm" />
-                        <a style="text-decoration: none" th:href="@{/product/add/{id}/{action}(id=${product.getKey().id},action='show')}"> plus</a>
+                        <a style="text-decoration: none" th:href="@{/shopping/add/{id}/{action}(id=${product.getKey().id},action='show')}"> plus</a>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 class="mb-0" th:text="${product.getKey().price}"></h6>
                     </div>
                     <hr class="my-4">
                   </div>
-                  <h3>Total Products: <span th:text="${cart.countProductQuantity()}"></span></h3>
+                  <h3>Total Products: <span th:text="${cart.countProductQuantityy()}"></span></h3>
                   <div class="d-flex justify-content-between mb-5">
                     <h5 class="text-uppercase" ></h5>
-                    <h5 th:text="${cart.countTotalPayment()}"></h5>
+                    <h5 th:text="${cart.countTotalPaymentt()}"></h5>
                   </div>
 
                   <button type="button" class="btn btn-dark btn-block btn-lg"
-                          data-mdb-ripple-color="dark"><a>Register</a></button>
+                          data-mdb-ripple-color="dark"><a href="/shopping/end-cart">Register</a></button>
                 </div>
               </div>
             </div>
