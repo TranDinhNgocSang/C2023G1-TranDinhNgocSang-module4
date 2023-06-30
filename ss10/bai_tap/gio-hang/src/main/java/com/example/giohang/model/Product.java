@@ -11,6 +11,7 @@ public class Product {
     private Long id;
     private String name;
     private double price;
+    @Column(columnDefinition = "LONG TEXT")
     private String description;
 
     @Column(columnDefinition = "LONGTEXT")

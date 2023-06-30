@@ -24,10 +24,9 @@ public class ProductController {
     }
 
     @GetMapping("")
-    public ModelAndView showShop() {
-        ModelAndView modelAndView = new ModelAndView("/shop");
-        modelAndView.addObject("products", productService.findAll());
-        return modelAndView;
+    public String showShop(Model model) {
+        model.addAttribute("products", productService.findAll());
+        return "shop";
     }
 
 
@@ -55,6 +54,9 @@ public class ProductController {
 
     @GetMapping("/view")
     String showView (@RequestParam("id") long id, Model model){
+        if (productService.findById(id)==null){
+            return "error.404";
+        }
         model.addAttribute("product",productService.findById(id));
         return "view";
     }

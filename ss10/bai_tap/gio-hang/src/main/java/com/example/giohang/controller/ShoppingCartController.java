@@ -18,12 +18,10 @@ public class ShoppingCartController {
     @Autowired
     private IProductService productService;
 
-
     @GetMapping("/shopping-cart")
-    public ModelAndView showCart(@SessionAttribute("cart") Cart cart) {
-        ModelAndView modelAndView = new ModelAndView("/cart");
-        modelAndView.addObject("cart", cart);
-        return modelAndView;
+    public String showCart(@SessionAttribute("cart") Cart cart,Model model) {
+        model.addAttribute("cart", cart);
+        return "cart";
     }
 
     @GetMapping("delete/{id}")
