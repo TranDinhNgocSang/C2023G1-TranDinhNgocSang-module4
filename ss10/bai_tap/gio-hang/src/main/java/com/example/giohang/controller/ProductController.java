@@ -30,6 +30,7 @@ public class ProductController {
     }
 
 
+
 //    Nếu ở controller khai báo session thì có thể lấy session bằng @ModelAttribute hoặc @SessionAttributes
 //    nhưng qua controller khác thì chỉ lất session qua @SessionAttributes => dùng @SessionAttributes cho mọi trường hợp
 
