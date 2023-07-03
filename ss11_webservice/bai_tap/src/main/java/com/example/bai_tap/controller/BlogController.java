@@ -17,8 +17,8 @@ public class BlogController {
     private IBlogService blogService;
 
     @GetMapping("")
-    public List<Blog> getlistBlog() {
-        return blogService.getListBlog();
+    public ResponseEntity<List<Blog>> getlistBlog() {
+        return new ResponseEntity<>(blogService.getListBlog(),HttpStatus.OK);
     }
 
     @PostMapping("")
